@@ -1,18 +1,17 @@
 <template>
   <div>
-    <a href="#" v-on:click="current">{{ memo }}</a>
+    <a href="#" v-on:click="current">{{ memo.description }}</a>
   </div>
 </template>
 
 <script>
 export default {
   props: {
-      memo: String,
-      id: Number
+      memo: Object,
     },
   methods: {
     current(){
-      this.$emit("currentMemo", this.memo, this.id)
+      this.$emit("currentMemo", this.memo)
     }
   }
 }

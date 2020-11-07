@@ -1,7 +1,8 @@
 import Vue from 'vue'
+import uuid from 'vue-uuid';
 import App from './App.vue'
 
-
+Vue.use(uuid);
 Vue.config.devtools = true
 Vue.config.productionTip = false
 

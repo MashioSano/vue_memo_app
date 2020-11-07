@@ -2,7 +2,7 @@
   <div>
     <h1>フォーム</h1>
     <button @click="formup">+</button>
-     <form v-show="formDisplay">
+     <form v-if="formDisplay">
         <textarea v-model="value"></textarea>
         <input type="button" value="編集" v-on:click="aaa">
         <input type="button" value="削除" v-on:click="toDelete">
@@ -13,13 +13,12 @@
 <script>
 export default {
   props: {
-      memo: String,
-      id: Number
+    memo: Object,
   },
   data(){
     return {
       formDisplay: false,
-      value: this.memo || "新規メモ"
+      value: "新規メモ"
     }
   },
   methods: {
@@ -27,12 +26,11 @@ export default {
       this.formDisplay=true
     },
     aaa(){
-      console.log(this.memo, this.id)
-      this.$emit("createOrUpdate", this.value, this.id)
+      this.$emit("createOrUpdate", this.value, this.memo)
       this.formdown()
     },
     toDelete(){
-      this.$emit("destroy", this.id)
+      this.$emit("destroy", this.memo)
       this.formdown()
     },
     formdown(){
@@ -42,7 +40,7 @@ export default {
   watch: {
     memo(newMemo){
       this.formup()
-      this.value=newMemo
+      this.value=newMemo.description
     }
   }
 }

@@ -1,7 +1,7 @@
 <template>
   <div>
-    <MemoForm @createOrUpdate="createOrUpdate" @destroy="destroy" :id="currentMemoId" :memo="currentMemo"></MemoForm>
-    <MemoList v-for="(memo, key) in firstLines()" :key="key" :id="key" v-bind:memo="memo" @currentMemo="current"></MemoList>
+    <MemoForm @createOrUpdate="createOrUpdate" @destroy="destroy" :memo="currentMemo"></MemoForm>
+    <MemoList v-for="(memo, key) in memos" :key="key" :id="key" v-bind:memo="memo" @currentMemo="current"></MemoList>
   </div>
 </template>
 
@@ -17,7 +17,6 @@
      data(){
       return {
         memos: [],
-        currentMemoId: undefined,
         currentMemo: undefined
       }
     },
@@ -25,24 +24,29 @@
       firstLines(){
         return this.memos.map(element => (element.split(/\r\n|\r|\n/)[0]))
       },
-      createOrUpdate(value, id){
-        if(id===undefined){
-          this.memos.push(value)
+      createOrUpdate(value, memo){
+        if(memo===undefined){
+          let newMemo = {id: this.$uuid.v4(), description: value}
+          console.log("New Obj!", newMemo)
+          this.memos.push(newMemo)
           localStorage.setItem('memos', JSON.stringify(this.memos))
         }else{
-          this.memos[id] = value
+          const target = this.memos.find((m) => {
+            return (m.id === memo.id)
+          })
+          target.description = value
           localStorage.setItem('memos', JSON.stringify(this.memos))
         }
       },
-      destroy(id){
-        console.log("aaa")
-        this.memos.splice(id, 1)
+      destroy(memo){
+        console.log("削除するメモ", memo)
+        const index = this.memos.findIndex((v) => v.id === memo.id);
+        this.memos.splice(index, 1)
         localStorage.setItem('memos', JSON.stringify(this.memos))
       },
-      current(memo, id){
-        console.log("Memo.vueのcurrentメソッド", memo, id)
+      current(memo){
+        console.log("Memo.vueのcurrentメソッド", memo)
         this.currentMemo = memo
-        this.currentMemoId = id
       }
     },
      mounted () {
