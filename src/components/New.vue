@@ -6,7 +6,7 @@
         <input type="button" v-on:click="updateOrCreate" value="編集">
         <input type="button" v-on:click="destroy" value="削除">
      </form>
-        <div v-for="(memo, key) in firstLines()" :key="key">
+        <div v-for="(memo, key) in firstLines()" :key="key" :id="key">
           <div class="memo">
             <a href="#" v-on:click="edit(memos[key], key)" class="discription">{{ memo }}</a>
           </div>
