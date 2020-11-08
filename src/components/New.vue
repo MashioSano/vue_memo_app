@@ -25,9 +25,6 @@ export default {
       }
     },
     methods: {
-      firstLines(){
-        return this.memos.map(element => (element.split(/\r\n|\r|\n/)[0]))
-      },
       edit(memo, key){
         this.id=key
         this.newMemo = memo

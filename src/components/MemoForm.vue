@@ -35,12 +35,15 @@ export default {
     },
     formdown(){
       this.formDisplay=false
+      this.value = "新規メモ"
     }
   },
   watch: {
     memo(newMemo){
-      this.formup()
-      this.value=newMemo.description
+      if(newMemo){
+        this.value=newMemo.description
+        this.formup()
+      }
     }
   }
 }

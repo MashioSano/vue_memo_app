@@ -27,25 +27,27 @@
       createOrUpdate(value, memo){
         if(memo===undefined){
           let newMemo = {id: this.$uuid.v4(), description: value}
-          console.log("New Obj!", newMemo)
           this.memos.push(newMemo)
           localStorage.setItem('memos', JSON.stringify(this.memos))
+          this.currentMemo=undefined
         }else{
           const target = this.memos.find((m) => {
             return (m.id === memo.id)
           })
           target.description = value
           localStorage.setItem('memos', JSON.stringify(this.memos))
+          this.currentMemo=undefined
         }
       },
       destroy(memo){
-        console.log("削除するメモ", memo)
-        const index = this.memos.findIndex((v) => v.id === memo.id);
-        this.memos.splice(index, 1)
-        localStorage.setItem('memos', JSON.stringify(this.memos))
+        if (memo){
+          const index = this.memos.findIndex((v) => v.id === memo.id);
+          this.memos.splice(index, 1)
+          localStorage.setItem('memos', JSON.stringify(this.memos))
+          this.currentMemo=undefined
+        }
       },
       current(memo){
-        console.log("Memo.vueのcurrentメソッド", memo)
         this.currentMemo = memo
       }
     },
