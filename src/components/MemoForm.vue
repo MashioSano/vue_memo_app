@@ -4,7 +4,7 @@
     <button @click="formup">+</button>
      <form v-if="formDisplay">
         <textarea v-model="value"></textarea>
-        <input type="button" value="編集" v-on:click="aaa">
+        <input type="button" value="編集" v-on:click="toCreateOrUpdate">
         <input type="button" value="削除" v-on:click="toDelete">
      </form>
   </div>
@@ -25,7 +25,7 @@ export default {
     formup(){
       this.formDisplay=true
     },
-    aaa(){
+    toCreateOrUpdate(){
       this.$emit("createOrUpdate", this.value, this.memo)
       this.formdown()
     },

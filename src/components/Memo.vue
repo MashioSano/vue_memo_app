@@ -1,7 +1,7 @@
 <template>
   <div>
     <MemoForm @createOrUpdate="createOrUpdate" @destroy="destroy" :memo="currentMemo"></MemoForm>
-    <MemoList v-for="(memo, key) in memos" :key="key" :id="key" v-bind:memo="memo" @currentMemo="current"></MemoList>
+    <MemoList v-for="(memo, key) in memos" :key="key" :id="key" v-bind:memo="memo" @clickedMemo="updateCurrentMemo"></MemoList>
   </div>
 </template>
 
@@ -47,7 +47,7 @@
           this.currentMemo=undefined
         }
       },
-      current(memo){
+      updateCurrentMemo(memo){
         this.currentMemo = memo
       }
     },

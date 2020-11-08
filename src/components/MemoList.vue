@@ -11,7 +11,7 @@ export default {
     },
   methods: {
     current(){
-      this.$emit("currentMemo", this.memo)
+      this.$emit("clickedMemo", this.memo)
     }
   },
   computed: {
