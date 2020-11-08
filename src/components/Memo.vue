@@ -1,7 +1,9 @@
 <template>
-  <div>
+  <div class="main">
     <MemoForm @createOrUpdate="createOrUpdate" @destroy="destroy" :memo="currentMemo"></MemoForm>
-    <MemoList v-for="(memo, key) in memos" :key="key" :id="key" v-bind:memo="memo" @clickedMemo="updateCurrentMemo"></MemoList>
+    <div class="memos">
+      <MemoList v-for="(memo, key) in memos" :key="key" :id="key" v-bind:memo="memo" @clickedMemo="updateCurrentMemo"></MemoList>
+    </div>
   </div>
 </template>
 
@@ -40,7 +42,7 @@
         }
       },
       destroy(memo){
-        if (memo){
+        if(memo){
           const index = this.memos.findIndex((v) => v.id === memo.id);
           this.memos.splice(index, 1)
           localStorage.setItem('memos', JSON.stringify(this.memos))
@@ -58,7 +60,21 @@
         } catch (e) {
           localStorage.removeItem('memos')
         }
-    }
+      }
   }
 }
 </script>
+
+<style scoped>
+  .main{
+    max-width: 600px;
+    margin: 0 auto;
+    background-color: #42b983;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+  }
+  .memos{
+    margin: 3px;
+  }
+</style>

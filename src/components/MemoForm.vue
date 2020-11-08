@@ -1,11 +1,12 @@
 <template>
   <div>
-    <h1>フォーム</h1>
-    <button @click="formup">+</button>
+    <button @click="formup" class="button">+</button>
      <form v-if="formDisplay">
-        <textarea v-model="value"></textarea>
-        <input type="button" value="編集" v-on:click="toCreateOrUpdate">
-        <input type="button" value="削除" v-on:click="toDelete">
+        <textarea v-model="value" rows="8" cols="40"></textarea>
+        <div>
+          <input type="button" value="編集" v-on:click="toCreateOrUpdate" class="button">
+          <input type="button" value="削除" v-on:click="toDelete" class="button">
+        </div>
      </form>
   </div>
 </template>
@@ -18,7 +19,8 @@ export default {
   data(){
     return {
       formDisplay: false,
-      value: "新規メモ"
+      value: "新規メモ",
+      height: 100,
     }
   },
   methods: {
@@ -48,3 +50,9 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+  .button{
+    margin: 3px;
+  }
+</style>
