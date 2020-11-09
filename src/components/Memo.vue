@@ -2,19 +2,19 @@
   <div class="main">
     <MemoForm @createOrUpdate="createOrUpdate" @destroy="destroy" :memo="currentMemo"></MemoForm>
     <div class="memos">
-      <MemoList v-for="(memo, key) in memos" :key="key" :id="key" v-bind:memo="memo" @clickedMemo="updateCurrentMemo"></MemoList>
+      <MemoDetail v-for="(memo, key) in memos" :key="key" :id="key" :memo="memo" @clickedMemo="updateCurrentMemo"></MemoDetail>
     </div>
   </div>
 </template>
 
 <script>
 import MemoForm from '../components/MemoForm.vue'
-import MemoList from '../components/MemoList.vue'
+import MemoDetail from '../components/MemoDetail.vue'
 
 export default {
   components: {
     MemoForm,
-    MemoList
+    MemoDetail
   },
   data () {
     return {
