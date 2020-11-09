@@ -20,7 +20,6 @@ export default {
     return {
       formDisplay: false,
       value: '新規メモ',
-      height: 100
     }
   },
   methods: {
