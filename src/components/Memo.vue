@@ -2,7 +2,7 @@
   <div class="main">
     <MemoForm @createOrUpdate="createOrUpdate" @destroy="destroy" :memo="currentMemo"></MemoForm>
     <div class="memos">
-      <MemoDetail v-for="(memo, key) in memos" :key="key" :id="key" :memo="memo" @clickedMemo="updateCurrentMemo"></MemoDetail>
+      <MemoDetail v-for="(memo, key) in memos" :key="key" :memo="memo" @clickedMemo="updateCurrentMemo"></MemoDetail>
     </div>
   </div>
 </template>
