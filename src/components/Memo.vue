@@ -8,59 +8,59 @@
 </template>
 
 <script>
-  import MemoForm from "../components/MemoForm.vue"
-  import MemoList from "../components/MemoList.vue"
+import MemoForm from '../components/MemoForm.vue'
+import MemoList from '../components/MemoList.vue'
 
-  export default {
-    components: {
-      MemoForm,
-      MemoList
+export default {
+  components: {
+    MemoForm,
+    MemoList
+  },
+  data () {
+    return {
+      memos: [],
+      currentMemo: undefined
+    }
+  },
+  methods: {
+    firstLines () {
+      return this.memos.map(element => (element.split(/\r\n|\r|\n/)[0]))
     },
-     data(){
-      return {
-        memos: [],
-        currentMemo: undefined
+    createOrUpdate (value, memo) {
+      if (memo === undefined) {
+        const newMemo = { id: this.$uuid.v4(), description: value }
+        this.memos.push(newMemo)
+        localStorage.setItem('memos', JSON.stringify(this.memos))
+        this.currentMemo = undefined
+      } else {
+        const target = this.memos.find((m) => {
+          return (m.id === memo.id)
+        })
+        target.description = value
+        localStorage.setItem('memos', JSON.stringify(this.memos))
+        this.currentMemo = undefined
       }
     },
-    methods: {
-      firstLines(){
-        return this.memos.map(element => (element.split(/\r\n|\r|\n/)[0]))
-      },
-      createOrUpdate(value, memo){
-        if(memo===undefined){
-          let newMemo = {id: this.$uuid.v4(), description: value}
-          this.memos.push(newMemo)
-          localStorage.setItem('memos', JSON.stringify(this.memos))
-          this.currentMemo=undefined
-        }else{
-          const target = this.memos.find((m) => {
-            return (m.id === memo.id)
-          })
-          target.description = value
-          localStorage.setItem('memos', JSON.stringify(this.memos))
-          this.currentMemo=undefined
-        }
-      },
-      destroy(memo){
-        if(memo){
-          const index = this.memos.findIndex((v) => v.id === memo.id);
-          this.memos.splice(index, 1)
-          localStorage.setItem('memos', JSON.stringify(this.memos))
-          this.currentMemo=undefined
-        }
-      },
-      updateCurrentMemo(memo){
-        this.currentMemo = memo
+    destroy (memo) {
+      if (memo) {
+        const index = this.memos.findIndex((v) => v.id === memo.id)
+        this.memos.splice(index, 1)
+        localStorage.setItem('memos', JSON.stringify(this.memos))
+        this.currentMemo = undefined
       }
     },
-     mounted () {
-      if (localStorage.getItem('memos')) {
-        try {
-          this.memos = JSON.parse(localStorage.getItem('memos'))
-        } catch (e) {
-          localStorage.removeItem('memos')
-        }
+    updateCurrentMemo (memo) {
+      this.currentMemo = memo
+    }
+  },
+  mounted () {
+    if (localStorage.getItem('memos')) {
+      try {
+        this.memos = JSON.parse(localStorage.getItem('memos'))
+      } catch (e) {
+        localStorage.removeItem('memos')
       }
+    }
   }
 }
 </script>

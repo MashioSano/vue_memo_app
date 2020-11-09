@@ -14,36 +14,36 @@
 <script>
 export default {
   props: {
-    memo: Object,
+    memo: Object
   },
-  data(){
+  data () {
     return {
       formDisplay: false,
-      value: "新規メモ",
-      height: 100,
+      value: '新規メモ',
+      height: 100
     }
   },
   methods: {
-    formup(){
-      this.formDisplay=true
+    formup () {
+      this.formDisplay = true
     },
-    toCreateOrUpdate(){
-      this.$emit("createOrUpdate", this.value, this.memo)
+    toCreateOrUpdate () {
+      this.$emit('createOrUpdate', this.value, this.memo)
       this.formdown()
     },
-    toDelete(){
-      this.$emit("destroy", this.memo)
+    toDelete () {
+      this.$emit('destroy', this.memo)
       this.formdown()
     },
-    formdown(){
-      this.formDisplay=false
-      this.value = "新規メモ"
+    formdown () {
+      this.formDisplay = false
+      this.value = '新規メモ'
     }
   },
   watch: {
-    memo(newMemo){
-      if(newMemo){
-        this.value=newMemo.description
+    memo (newMemo) {
+      if (newMemo) {
+        this.value = newMemo.description
         this.formup()
       }
     }

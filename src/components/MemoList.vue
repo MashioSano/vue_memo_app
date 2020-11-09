@@ -7,23 +7,23 @@
 <script>
 export default {
   props: {
-      memo: Object,
-    },
+    memo: Object
+  },
   methods: {
-    current(){
-      this.$emit("clickedMemo", this.memo)
+    current () {
+      this.$emit('clickedMemo', this.memo)
     }
   },
   computed: {
-    fistLine: function(){
-       return this.memo.description.split(/\r\n|\r|\n/)[0]
+    fistLine: function () {
+      return this.memo.description.split(/\r\n|\r|\n/)[0]
     }
   }
 }
 </script>
 
 <style scoped>
-  a {
+  a{
     color:black;
   }
 </style>
