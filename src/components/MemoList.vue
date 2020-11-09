@@ -1,6 +1,6 @@
 <template>
   <div>
-    <a href="#" v-on:click="current">{{ fistLine }}</a>
+    <a href="#" v-on:click="current">{{ firstLine }}</a>
   </div>
 </template>
 
@@ -15,7 +15,7 @@ export default {
     }
   },
   computed: {
-    fistLine: function () {
+    firstLine: function () {
       return this.memo.description.split(/\r\n|\r|\n/)[0]
     }
   }
