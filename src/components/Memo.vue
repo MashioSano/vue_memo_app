@@ -19,7 +19,7 @@ export default {
   data () {
     return {
       memos: [],
-      currentMemo: undefined
+      currentMemo: null
     }
   },
   methods: {
@@ -27,18 +27,18 @@ export default {
       return this.memos.map(element => (element.split(/\r\n|\r|\n/)[0]))
     },
     createOrUpdate (value, memo) {
-      if (memo === undefined) {
+      if (memo === null) {
         const newMemo = { id: this.$uuid.v4(), description: value }
         this.memos.push(newMemo)
         localStorage.setItem('memos', JSON.stringify(this.memos))
-        this.currentMemo = undefined
+        this.currentMemo = null
       } else {
         const target = this.memos.find((m) => {
           return (m.id === memo.id)
         })
         target.description = value
         localStorage.setItem('memos', JSON.stringify(this.memos))
-        this.currentMemo = undefined
+        this.currentMemo = null
       }
     },
     destroy (memo) {
@@ -46,7 +46,7 @@ export default {
         const index = this.memos.findIndex((v) => v.id === memo.id)
         this.memos.splice(index, 1)
         localStorage.setItem('memos', JSON.stringify(this.memos))
-        this.currentMemo = undefined
+        this.currentMemo = null
       }
     },
     updateCurrentMemo (memo) {
