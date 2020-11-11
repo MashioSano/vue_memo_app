@@ -4,8 +4,8 @@
      <form v-if="formDisplay">
         <textarea v-model="value" rows="8" cols="40"></textarea>
         <div>
-          <input type="button" value="編集" v-on:click="toCreateOrUpdate" class="button">
-          <input type="button" value="削除" v-on:click="toDelete" class="button">
+          <input type="button" value="編集" v-on:click="emitMemo('createOrUpdate')" class="button">
+          <input type="button" value="削除" v-on:click="emitMemo('destroy')" class="button">
         </div>
      </form>
   </div>
@@ -23,16 +23,17 @@ export default {
     }
   },
   methods: {
+    emitMemo (action) {
+      if (action === 'destroy'){
+        this.$emit('destroy', this.memo)
+        this.formdown()
+      } else {
+        this.$emit('createOrUpdate', this.value, this.memo)
+        this.formdown()
+      }
+    },
     formup () {
       this.formDisplay = true
-    },
-    toCreateOrUpdate () {
-      this.$emit('createOrUpdate', this.value, this.memo)
-      this.formdown()
-    },
-    toDelete () {
-      this.$emit('destroy', this.memo)
-      this.formdown()
     },
     formdown () {
       this.formDisplay = false
