@@ -23,9 +23,6 @@ export default {
     }
   },
   methods: {
-    firstLines () {
-      return this.memos.map(element => (element.split(/\r\n|\r|\n/)[0]))
-    },
     createOrUpdate (value, memo) {
       if (memo === null) {
         const newMemo = { id: this.$uuid.v4(), description: value }

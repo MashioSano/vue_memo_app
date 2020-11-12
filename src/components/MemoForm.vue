@@ -1,7 +1,7 @@
 <template>
   <div>
-    <button @click="formup" class="button">+</button>
-     <form v-if="formDisplay">
+    <button @click="show" class="button">+</button>
+     <form v-if="display">
         <textarea v-model="value" rows="8" cols="40"></textarea>
         <div>
           <input type="button" value="編集" v-on:click="emitMemo('createOrUpdate')" class="button">
@@ -18,7 +18,7 @@ export default {
   },
   data () {
     return {
-      formDisplay: false,
+      display: false,
       value: '新規メモ',
     }
   },
@@ -26,17 +26,17 @@ export default {
     emitMemo (action) {
       if (action === 'destroy'){
         this.$emit('destroy', this.memo)
-        this.formdown()
+        this.hide()
       } else {
         this.$emit('createOrUpdate', this.value, this.memo)
-        this.formdown()
+        this.hide()
       }
     },
-    formup () {
-      this.formDisplay = true
+    show () {
+      this.display = true
     },
-    formdown () {
-      this.formDisplay = false
+    hide () {
+      this.display = false
       this.value = '新規メモ'
     }
   },
@@ -44,7 +44,7 @@ export default {
     memo (newMemo) {
       if (newMemo) {
         this.value = newMemo.description
-        this.formup()
+        this.show()
       }
     }
   }
